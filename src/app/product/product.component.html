@@ -15,6 +15,8 @@
          <th> nom</th>
          <th> price</th>
          <th> delete</th>
+         <th> On Sale</th>
+         <th> toggle promo</th>
        </tr>
       </thead>
         <tbody>
@@ -24,6 +26,16 @@
           <td> {{p.price}}</td>
           <td> <button (click)="handleDeletProduct(p)" class="btn btn-danger">
             <i class="bi bi-trash"></i>
+          </button>
+          </td>
+          <td *ngIf="p.onSale==true">
+            <h3 class="badge bg-success"> % 50 Off </h3>
+          </td>
+          <td *ngIf="p.onSale==false">
+            <h3 class="badge bg-danger"> no promo </h3>
+          </td>
+          <td> <button (click)="handelTogglePromo(p)" class="btn btn-success">
+            <i class="bi bi-cart-check"></i>
           </button>
           </td>
         </tr>
