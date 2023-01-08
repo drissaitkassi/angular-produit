@@ -8,6 +8,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ScratchComponent } from './scratch/scratch.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -21,9 +22,9 @@ import { ScratchComponent } from './scratch/scratch.component';
   ],
   imports: [
     BrowserModule,
-
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
