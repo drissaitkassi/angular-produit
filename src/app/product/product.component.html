@@ -1,5 +1,9 @@
 <div class="container">
-  <div class="card">
+
+  <ng-template #err><div class="text-danger">
+    {{errorMessage}}
+  </div></ng-template>
+  <div class="card" *ngIf="products;else err">
     <div class="card-header">
       <h1 class="text-center"> liste produits</h1>
     </div>
@@ -10,6 +14,7 @@
          <th> id</th>
          <th> nom</th>
          <th> price</th>
+         <th> delete</th>
        </tr>
       </thead>
         <tbody>
@@ -17,7 +22,10 @@
           <td> {{p.id}}</td>
           <td> {{p.nom}}</td>
           <td> {{p.price}}</td>
-
+          <td> <button (click)="handleDeletProduct(p)" class="btn btn-danger">
+            <i class="bi bi-trash"></i>
+          </button>
+          </td>
         </tr>
 
         </tbody>
