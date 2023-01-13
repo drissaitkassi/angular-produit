@@ -8,12 +8,12 @@
       <h1 class="text-center"> liste produits</h1>
     </div>
     <div class="card-body">
-      <form method="get" class="mb-3" >
-        <div class="input-group">
+      <form [formGroup]="searchFormGroup" (ngSubmit)="handelSearchForm()" method="get" class="mb-3" >
+        <div  class="input-group">
           <label class="input-group-text bg-info text-white">
             Keyword
           </label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName=keyword>
           <button class=" btn btn-info">
             <i class="bi bi-search text-white"></i>
           </button>
@@ -50,6 +50,11 @@
           </button>
           </td>
         </tr>
+ <!--       <ul>
+          <li *ngFor="products.length%5">
+            <a></a>
+          </li>
+        </ul>-->
 
         </tbody>
       </table>
