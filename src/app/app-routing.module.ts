@@ -4,10 +4,13 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
 import {ProductComponent} from "./product/product.component";
 import {CustomerComponent} from "./customer/customer.component";
+import {AuthenticationComponent} from "./authentication/authentication.component";
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: AuthenticationComponent },
+  { path: 'login', component: AuthenticationComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'product', component: ProductComponent },
   { path: 'customer', component: CustomerComponent },
 

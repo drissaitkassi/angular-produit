@@ -15,9 +15,9 @@ export class ProductComponent implements OnInit {
   size:number=5
   totalPages!:number;
   totalPageArry!:Array<number>
-  //currentAction:string="all"
+  currentAction:string="all"
 
-  emptyKeyword:string=""
+  //emptyKeyword:string=""
 
   /*
   1) step one
@@ -137,23 +137,27 @@ searchFormGroup!:FormGroup
   }
 
   handelSearchForm() {
-    //this.currentAction="search"
+    this.currentAction="search"
+    this.currentPage=0
 
 
     let kwd=this.searchFormGroup.value.keyword
-    this.emptyKeyword=kwd
+    //this.emptyKeyword=kwd
 
-    console.log(this.emptyKeyword)
+    console.log("im on handle search form ")
     // if it has value it will set the empty keyword to the current value
     // that will be used to determine if
     // we are going to call  this.handleGetPageProducts() or this.handelSearchForm()
 
+    console.log(this.currentPage)
 
     this.productservice.searchPageProduct(kwd,this.currentPage,this.size).subscribe({
       next:(data)=>{
+        console.log("im on search product returned data")
         this.products=data.products
         this.totalPages=data.totalPages
         this.currentPage=data.page
+        console.log(data.page)
         this.totalPageArry=Array.from(Array(this.totalPages).keys())
       }
        ,
@@ -167,25 +171,32 @@ searchFormGroup!:FormGroup
   // because i had to get the value of the current page from the mouse click event and set the current value to
   //the new value from mouse event , for that i needed to create a method that takes in the value from mouse click
   // use it to set the currentPage value then call handleGetPageProducts() method
-  goToPage(t: number) {
+   goToPage(t: number) {
+    console.log("im on go to method")
     this.currentPage=t
     // i didn't had the reflex to call the  this.handleGetPageProducts() or  this.handelSearchForm() "in case of a search keyword" method here
 
     // this is a trick learned from youssfi
- /*   if(this.currentAction ==="all"){
+
+    if(this.currentAction ==="all"){
       this.handleGetPageProducts()
     }else
-    this.handelSearchForm()*/
+    this.handelSearchForm()
 
     // and here is my own implementation
 
-    if (this.emptyKeyword === ""){
+/*    if (this.emptyKeyword === ""){
 
       this.handleGetPageProducts()
       console.log("im search all")
 
 
-    }else{this.handelSearchForm() }
+    }else{
+
+      console.log("im on search by kwd")
+      this.handelSearchForm()
+
+    }*/
 
   }
 }

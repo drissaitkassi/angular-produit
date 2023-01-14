@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ScratchComponent } from './scratch/scratch.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     CustomerComponent,
     NavbarComponent,
     HomeComponent,
-    ScratchComponent
+    ScratchComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
