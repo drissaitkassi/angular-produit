@@ -14,3 +14,6 @@ export interface PageProduct{
   size:number;
   totalPages:number;
 }
+
+
+

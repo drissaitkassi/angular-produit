@@ -138,7 +138,7 @@ searchFormGroup!:FormGroup
 
   handelSearchForm() {
     this.currentAction="search"
-    this.currentPage=0
+
 
 
     let kwd=this.searchFormGroup.value.keyword
