@@ -31,6 +31,7 @@
        </tr>
       </thead>
         <tbody>
+
         <tr *ngFor="let p of products">
           <td> {{p.id}}</td>
           <td> {{p.nom}}</td>
@@ -50,11 +51,11 @@
           </button>
           </td>
         </tr>
- <!--       <ul>
-          <li *ngFor="products.length%5">
-            <a></a>
+        <ul class="nav nav-pills" >
+          <li   *ngFor="let t of totalPageArry">
+            <a [ngClass]="t==currentPage? 'btn btn-info':'btn btn-outline-info'" class="ms-0" (click)="goToPage(t)">{{t}}</a>
           </li>
-        </ul>-->
+        </ul>
 
         </tbody>
       </table>

@@ -11,6 +11,14 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class ProductComponent implements OnInit {
   products! :Array<Product>
+  currentPage:number =0
+  size:number=5
+  totalPages!:number;
+  totalPageArry!:Array<number>
+  //currentAction:string="all"
+
+  emptyKeyword:string=""
+
   /*
   1) step one
   create a variable”searchFormGroup” of
@@ -58,17 +66,30 @@ searchFormGroup!:FormGroup
   constructor(private productservice:ProduitService,private fb:FormBuilder) {
 
   }
-  handleGetAllProducts(){
-    this.productservice.getProducts().subscribe(
-      { next:(data)=>this.products=data,
+  handleGetPageProducts(){
+    this.productservice.getPageProducts(this.currentPage,this.size).subscribe(
+      { next:(data)=>{this.products=data.products
+      this.totalPages=data.totalPages
+        this.currentPage=data.page
+          this.totalPageArry=Array.from(Array(this.totalPages).keys())
+        },
         error:(err)=> this.errorMessage=err},
 
     )
   }
 
+
+/*  handleGetAllProducts(){
+    this.productservice.getProducts().subscribe(
+      { next:(data)=>this.products=data,
+        error:(err)=> this.errorMessage=err},
+
+    )
+  }*/
+
   ngOnInit(): void {
-    this.handleGetAllProducts()
     this.searchFormGroup = this.fb.group({keyword: this.fb.control(null)})
+    this.handleGetPageProducts()
   }
 
   handleDeletProduct(p:Product) {
@@ -116,15 +137,55 @@ searchFormGroup!:FormGroup
   }
 
   handelSearchForm() {
+    //this.currentAction="search"
+
+
     let kwd=this.searchFormGroup.value.keyword
-    this.productservice.searchProduct(kwd).subscribe({
+    this.emptyKeyword=kwd
+
+    console.log(this.emptyKeyword)
+    // if it has value it will set the empty keyword to the current value
+    // that will be used to determine if
+    // we are going to call  this.handleGetPageProducts() or this.handelSearchForm()
+
+
+    this.productservice.searchPageProduct(kwd,this.currentPage,this.size).subscribe({
       next:(data)=>{
-        this.products=data}
+        this.products=data.products
+        this.totalPages=data.totalPages
+        this.currentPage=data.page
+        this.totalPageArry=Array.from(Array(this.totalPages).keys())
+      }
        ,
       error:(err)=>console.log("on error")
     }
 
     )
+
+  }
+  // my first reflex was to call handleGetPageProducts() method on the html which was not working
+  // because i had to get the value of the current page from the mouse click event and set the current value to
+  //the new value from mouse event , for that i needed to create a method that takes in the value from mouse click
+  // use it to set the currentPage value then call handleGetPageProducts() method
+  goToPage(t: number) {
+    this.currentPage=t
+    // i didn't had the reflex to call the  this.handleGetPageProducts() or  this.handelSearchForm() "in case of a search keyword" method here
+
+    // this is a trick learned from youssfi
+ /*   if(this.currentAction ==="all"){
+      this.handleGetPageProducts()
+    }else
+    this.handelSearchForm()*/
+
+    // and here is my own implementation
+
+    if (this.emptyKeyword === ""){
+
+      this.handleGetPageProducts()
+      console.log("im search all")
+
+
+    }else{this.handelSearchForm() }
 
   }
 }
