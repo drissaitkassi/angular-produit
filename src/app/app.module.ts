@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { ScratchComponent } from './scratch/scratch.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { AuthenticationComponent } from './authentication/authentication.component';
+import { AdminTemplateComponent } from './admin-template/admin-template.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
     NavbarComponent,
     HomeComponent,
     ScratchComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    AdminTemplateComponent
   ],
   imports: [
     BrowserModule,

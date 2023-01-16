@@ -5,14 +5,17 @@ import {HomeComponent} from "./home/home.component";
 import {ProductComponent} from "./product/product.component";
 import {CustomerComponent} from "./customer/customer.component";
 import {AuthenticationComponent} from "./authentication/authentication.component";
+import {AdminTemplateComponent} from "./admin-template/admin-template.component";
 
 
 const routes: Routes = [
   { path: '', component: AuthenticationComponent },
   { path: 'login', component: AuthenticationComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'product', component: ProductComponent },
-  { path: 'customer', component: CustomerComponent },
+  { path: 'admin', component: AdminTemplateComponent,children:[
+      { path: 'product', component: ProductComponent },
+      { path: 'customer', component: CustomerComponent },
+    ] },
+
 
 ]
 @NgModule({
